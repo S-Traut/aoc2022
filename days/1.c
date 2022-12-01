@@ -1,10 +1,10 @@
 /*
 Advent Of Code 2022 - Stéphane Traut
-This version is pretty rough and not scalable, and can be optimized / clean up
 
-It basically just loop through each characters of the input string, after each line return it
-increase the current elf_value, if there is 2 line return it take the elf value and check for its
-order in the TOP 3.
+The solution is very simple, but not scalable:
+We iterate through each line of the file, if the line has a RETURN character a the first position
+we check the value of the elf
+otherwise we increase the value of the elf by converting the line to an integer and add it to the elf.
 */
 
 #include <lib.h>
@@ -30,6 +30,8 @@ int main(void)
     // switch to the next elf
     if ('\n' == line[0])
     {
+      // This section is not scalable
+      // but I think it's sufficient for the problem.
       if (elf_value > first)
       {
         third = second;
