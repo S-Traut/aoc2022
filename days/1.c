@@ -11,22 +11,25 @@ order in the TOP 3.
 
 int main(void)
 {
-  aoc_file_t input = get_data("./data/d1.txt");
-  char BUFFER[10] = {0};
-  u32 buffer_index = 0;
+  FILE *fp;
+  char *line = NULL;
+  size_t len = 0;
+  size_t read;
+
   int elf_value = 0;
   int first, second, third;
 
-  for (size_t i = 0; i < input.size; ++i)
+  fp = fopen("./data/d1.txt", "r");
+  if (fp == NULL)
+    exit(EXIT_FAILURE);
+
+  // Reading the file for each line:
+  while ((read = getline(&line, &len, fp)) != -1)
   {
-    char current_char = input.data[i];
-    char next_char = input.data[i + 1];
-
-    if (next_char == '\0' || '\n' == current_char && '\n' == next_char)
+    // If the current line is a line return
+    // switch to the next elf
+    if ('\n' == line[0])
     {
-      elf_value += atoi(BUFFER);
-
-      // (TODO) Unscalable might be better to make it in a better way..
       if (elf_value > first)
       {
         third = second;
@@ -42,28 +45,20 @@ int main(void)
       {
         third = elf_value;
       }
-
       elf_value = 0;
-      aoc_clear_buffer(BUFFER, 10);
-      buffer_index = 0;
-      continue;
-    }
-
-    if ('\n' == current_char)
-    {
-      elf_value += atoi(BUFFER);
-      aoc_clear_buffer(BUFFER, 10);
-      buffer_index = 0;
     }
     else
     {
-      BUFFER[buffer_index] = current_char;
-      buffer_index++;
+      // Else we simply increase the elf value by converting the line to an integer
+      elf_value += atoi(line);
     }
   }
 
   printf("top 3: %d %d %d\n", first, second, third);
   printf("sum: %d\n", first + second + third);
 
-  free(input.data);
+  fclose(fp);
+  if (line)
+    free(line);
+  exit(EXIT_SUCCESS);
 }
