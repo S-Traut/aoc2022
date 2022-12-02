@@ -34,24 +34,34 @@ const char PLAY[3][3] = {
     {1, 2, 0},
 };
 
-const char MAPPINGS_L[6] = {'A', 'B', 'C', 'X', 'Y', 'Z'};
-const char MAPPINGS_N[6] = {0, 1, 2, 0, 1, 2};
+const char MAPPINGS[6] = {'A', 'B', 'C', 'X', 'Y', 'Z'};
 
+// Retreive the correct index by character
+// A & X - 0
+// B & Y - 1
+// C & Z - 2
 int get_index(char pick)
 {
   for (int i = 0; i < 6; ++i)
   {
-    if (MAPPINGS_L[i] == pick)
-    {
-      return MAPPINGS_N[i];
-    }
+    if (MAPPINGS[i] == pick)
+      return i % 3;
   }
   return 0;
 }
 
-// RULES:
-// ROCK, PAPER, CISOR
-int rps_logic(char left, char right)
+// For the first step, we simply take both left & right input
+// and return the RULES score from it
+int rps_logic_step_1(char left, char right)
+{
+  int e_index = get_index(left);
+  int u_index = get_index(right);
+  return RULES[e_index][u_index];
+}
+
+// For the second step, we do the same however,
+// we define the user play given the enemy play and how it should answer
+int rps_logic_step_2(char left, char right)
 {
   int e_index = get_index(left);
   int u_index = get_index(right);
@@ -66,7 +76,8 @@ int main(void)
   size_t len = 0;
   size_t read;
 
-  int score = 0;
+  int score_step_1 = 0;
+  int score_step_2 = 0;
 
   fp = fopen("./data/d2.txt", "r");
   if (fp == NULL)
@@ -75,12 +86,17 @@ int main(void)
   // Reading the file for each line:
   while ((read = getline(&line, &len, fp)) != -1)
   {
+    // Extract line inputs
     char e_play = line[0];
     char u_play = line[2];
-    score += rps_logic(e_play, u_play);
+
+    // Calcuate both logics
+    score_step_1 += rps_logic_step_1(e_play, u_play);
+    score_step_2 += rps_logic_step_2(e_play, u_play);
   }
 
-  printf("Score: %d\n", score);
+  printf("Score (1): %d\n", score_step_1);
+  printf("Score (2): %d\n", score_step_2);
 
   fclose(fp);
   if (line)
