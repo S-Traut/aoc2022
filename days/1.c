@@ -1,5 +1,6 @@
 /*
 Advent Of Code 2022 - Stéphane Traut
+DAY 1:
 
 The solution is very simple, but not scalable:
 We iterate through each line of the file, if the line has a RETURN character a the first position

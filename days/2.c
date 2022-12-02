@@ -1,3 +1,17 @@
+/*
+Advent Of Code 2022 - Stéphane Traut
+DAY 2
+
+For this solution I've used some const arrays to find the right answer to play
+This might be improved especially for the MAPPINGS constants
+
+The technique is simple: there is an array RULES that defines what you score using a 2D array
+E.G if your enemy play R which is 0 and you play P which is 1 the result is simple RULES[0][1] => 8
+
+For the second part, I created a similar array which store what you should play and combine both
+RULES and PLAY at the end to get the correct score.
+*/
+
 #include <lib.h>
 
 //   R P S
