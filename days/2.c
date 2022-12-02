@@ -14,6 +14,9 @@ RULES and PLAY at the end to get the correct score.
 
 #include <lib.h>
 
+#define A_OFFSET 65
+#define X_OFFSET 88
+
 //   R P S
 // R 4 8 3
 // P 1 5 9
@@ -34,41 +37,6 @@ const char PLAY[3][3] = {
     {1, 2, 0},
 };
 
-const char MAPPINGS[6] = {'A', 'B', 'C', 'X', 'Y', 'Z'};
-
-// Retreive the correct index by character
-// A & X - 0
-// B & Y - 1
-// C & Z - 2
-int get_index(char pick)
-{
-  for (int i = 0; i < 6; ++i)
-  {
-    if (MAPPINGS[i] == pick)
-      return i % 3;
-  }
-  return 0;
-}
-
-// For the first step, we simply take both left & right input
-// and return the RULES score from it
-int rps_logic_step_1(char left, char right)
-{
-  int e_index = get_index(left);
-  int u_index = get_index(right);
-  return RULES[e_index][u_index];
-}
-
-// For the second step, we do the same however,
-// we define the user play given the enemy play and how it should answer
-int rps_logic_step_2(char left, char right)
-{
-  int e_index = get_index(left);
-  int u_index = get_index(right);
-  int u_play = PLAY[e_index][u_index];
-  return RULES[e_index][u_play];
-}
-
 int main(void)
 {
   FILE *fp;
@@ -87,12 +55,12 @@ int main(void)
   while ((read = getline(&line, &len, fp)) != -1)
   {
     // Extract line inputs
-    char e_play = line[0];
-    char u_play = line[2];
+    int e_play = line[0] - A_OFFSET;
+    int u_play = line[2] - X_OFFSET;
 
-    // Calcuate both logics
-    score_step_1 += rps_logic_step_1(e_play, u_play);
-    score_step_2 += rps_logic_step_2(e_play, u_play);
+    // Calculate the values
+    score_step_1 += RULES[e_play][u_play];
+    score_step_2 += RULES[e_play][PLAY[e_play][u_play]];
   }
 
   printf("Score (1): %d\n", score_step_1);
