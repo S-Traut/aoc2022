@@ -21,7 +21,7 @@ RULES and PLAY at the end to get the correct score.
 // R 4 8 3
 // P 1 5 9
 // S 7 2 6
-const int RULES[3][3] = {
+const u8 RULES[3][3] = {
     {4, 8, 3},
     {1, 5, 9},
     {7, 2, 6},
@@ -31,7 +31,7 @@ const int RULES[3][3] = {
 // R S R P
 // P R P S
 // S P S R
-const int PLAY[3][3] = {
+const u8 PLAY[3][3] = {
     {2, 0, 1},
     {0, 1, 2},
     {1, 2, 0},
@@ -44,8 +44,8 @@ int main(void)
   size_t len = 0;
   size_t read;
 
-  int score_step_1 = 0;
-  int score_step_2 = 0;
+  u32 score_step_1 = 0;
+  u32 score_step_2 = 0;
 
   fp = fopen("./data/d2.txt", "r");
   if (fp == NULL)
@@ -55,12 +55,12 @@ int main(void)
   while ((read = getline(&line, &len, fp)) != -1)
   {
     // Extract line inputs
-    int e_play = line[0] - A_OFFSET;
-    int u_play = line[2] - X_OFFSET;
+    u8 e_play = (u8)(line[0] - A_OFFSET);
+    u8 u_play = (u8)(line[2] - X_OFFSET);
 
     // Calculate the values
-    score_step_1 += RULES[e_play][u_play];
-    score_step_2 += RULES[e_play][PLAY[e_play][u_play]];
+    score_step_1 += (u32)RULES[e_play][u_play];
+    score_step_2 += (u32)RULES[e_play][PLAY[e_play][u_play]];
   }
 
   printf("Score (1): %d\n", score_step_1);
