@@ -21,7 +21,7 @@ RULES and PLAY at the end to get the correct score.
 // R 4 8 3
 // P 1 5 9
 // S 7 2 6
-const char RULES[3][3] = {
+const int RULES[3][3] = {
     {4, 8, 3},
     {1, 5, 9},
     {7, 2, 6},
@@ -31,7 +31,7 @@ const char RULES[3][3] = {
 // R S R P
 // P R P S
 // S P S R
-const char PLAY[3][3] = {
+const int PLAY[3][3] = {
     {2, 0, 1},
     {0, 1, 2},
     {1, 2, 0},
