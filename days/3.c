@@ -2,6 +2,7 @@
 Advent Of Code 2022 - Stéphane Traut
 DAY 3
 
+This solution is pretty bad / messy, and need to be rewritten.
 */
 
 #include <lib.h>
