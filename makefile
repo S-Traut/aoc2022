@@ -13,3 +13,7 @@ lib:
 3: lib
 	gcc -I./include -c days/3.c -o dist/d3.o
 	gcc -I./include dist/lib.o dist/d3.o -o app
+
+4: lib
+	gcc -I./include -c days/4.c -o dist/d4.o
+	gcc -I./include dist/lib.o dist/d4.o -o app
