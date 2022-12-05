@@ -25,4 +25,10 @@ typedef struct rucksack_t
   u64 compartment_size;
 } rucksack_t;
 
+typedef struct cratestack_t
+{
+  char data[100];
+  u16 size;
+} cratestack_t;
+
 u8 aoc_interval_contains(interval_t inverval, u64 number);

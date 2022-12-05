@@ -17,3 +17,7 @@ lib:
 4: lib
 	gcc -I./include -c days/4.c -o dist/d4.o
 	gcc -I./include dist/lib.o dist/d4.o -o app
+
+5: lib
+	gcc -I./include -c days/5.c -o dist/d5.o
+	gcc -I./include dist/lib.o dist/d5.o -o app
