@@ -92,6 +92,7 @@ int main(void)
     group[i % 3] = rucksack;
     priority_sum += get_rucksack_priorities(rucksack);
 
+    // Every 3 rucksack, try to find a badge.
     if ((i + 1) % 3 == 0)
     {
       badge_sum += find_badge(group);
