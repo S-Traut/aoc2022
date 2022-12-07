@@ -17,10 +17,7 @@ void aoc_change_directory(fs_file_t **fs, char *file_name)
   for (u32 i = 0; i < current->file_count; ++i)
   {
     if (!strcmp(file_name, current->files[i].name))
-    {
-      printf("Moving to %s\n", file_name);
       *fs = current->files + i;
-    }
   }
 }
 
@@ -58,6 +55,25 @@ void aoc_make_space_string(int size)
     printf(" ");
 }
 
+u64 aoc_fs_sum(fs_file_t *fs)
+{
+  u64 sum = 0;
+  for (u32 i = 0; i < fs->file_count; ++i)
+  {
+    if (fs->files[i].type == 0)
+    {
+      sum += aoc_fs_sum(fs->files + i);
+    }
+    else
+      sum += fs->files[i].size;
+  }
+
+  if (sum < 100000)
+    return sum;
+
+  return 0;
+}
+
 void aoc_fs_print(fs_file_t *fs, int level)
 {
   aoc_make_space_string(level);
@@ -70,6 +86,9 @@ void aoc_fs_print(fs_file_t *fs, int level)
       continue;
     }
     aoc_make_space_string(level + 2);
-    printf("%d - %s\n", fs->size, fs->name);
+    printf("%d - %s\n", fs->files[i].size, fs->files[i].name);
   }
+
+  u64 sum = aoc_fs_sum(fs);
+  printf("%d\n", sum);
 }

@@ -24,7 +24,6 @@ dir tzhbztd
 214581 wmtvbq
 dir wqcsrw
 dir zjbzdrnd
--
 $ cd drjhjtm
 $ ls
 dir cvrf

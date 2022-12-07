@@ -45,6 +45,7 @@ struct fs_file_t
 
 void aoc_change_directory(fs_file_t **fs, char *file_name);
 void aoc_fs_add_file(fs_file_t *fs, fs_file_t file);
+u64 aoc_fs_sum(fs_file_t *fs);
 void aoc_fs_print(fs_file_t *fs, int level);
 void aoc_make_space_string(int size);
 u8 aoc_interval_contains(interval_t inverval, u64 number);
