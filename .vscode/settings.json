@@ -1,6 +1,11 @@
 {
   "files.associations": {
+    "*.ts": "typescript",
     "*.module": "php",
-    "string_view": "c"
+    "string_view": "c",
+    "*.tcc": "c",
+    "string": "c",
+    "istream": "c",
+    "streambuf": "c"
   }
 }

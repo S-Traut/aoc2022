@@ -31,4 +31,20 @@ typedef struct cratestack_t
   u16 size;
 } cratestack_t;
 
+typedef struct fs_file_t fs_file_t;
+struct fs_file_t
+{
+  u8 type;
+  char *name;
+  fs_file_t *files;
+  u32 buffer_size;
+  u32 file_count;
+  u64 size;
+  fs_file_t *parent;
+};
+
+void aoc_change_directory(fs_file_t **fs, char *file_name);
+void aoc_fs_add_file(fs_file_t *fs, fs_file_t file);
+void aoc_fs_print(fs_file_t *fs, int level);
+void aoc_make_space_string(int size);
 u8 aoc_interval_contains(interval_t inverval, u64 number);

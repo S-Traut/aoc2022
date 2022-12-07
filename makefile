@@ -1,6 +1,6 @@
 lib:
 	mkdir -p dist
-	gcc -I./include -c src/lib.c -o dist/lib.o
+	gcc -g -I./include -c src/lib.c -o dist/lib.o
 
 1: lib
 	gcc -I./include -c days/1.c -o dist/d1.o
@@ -25,3 +25,8 @@ lib:
 6: lib
 	gcc -I./include -c days/6.c -o dist/d6.o
 	gcc -I./include dist/lib.o dist/d6.o -o app
+
+7: lib
+	gcc -g -I./include -c days/7.c -o dist/d7.o
+	gcc -g -I./include dist/lib.o dist/d7.o -o app
+
